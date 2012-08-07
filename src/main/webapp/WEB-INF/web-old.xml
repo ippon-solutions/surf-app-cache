@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="WebApp_ID" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+  <!--
+
+     To get started in Jetty enter the following:
+
+     mvn clean jetty:run
+
+     Then Open File... in browser on /src/test/resources/demo.html
+
+  -->
+
+  <!-- Add configuration details here -->
+  <display-name>Surf App Cache</display-name>
+  <description>Caching app that provides surf data to the clients</description>
+
+  <!-- Spring context -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+      classpath:META-INF/spring/applicationContext.xml,
+    </param-value>
+  </context-param>
+
+  <!-- Listeners -->
+  <!-- Enable RESTEasy -->
+  <listener>
+    <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
+  </listener>
+  <!-- Enable Spring context -->
+  <listener>
+    <listener-class>
+      org.jboss.resteasy.plugins.spring.SpringContextLoaderListener
+    </listener-class>
+  </listener>
+
+  <!-- Servlets -->
+  <!-- Hand over all servlet processing to RESTEasy -->
+  <servlet>
+    <servlet-name>RESTEasy</servlet-name>
+    <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+  </servlet>
+
+  
+    
+    <servlet>
+        <servlet-name>requestFactory</servlet-name>
+        <servlet-class>uk.co.ipponsolutions.surfapp.server.CustomRequestFactoryServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>requestFactory</servlet-name>
+        <url-pattern>/gwtRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>RESTEasy</servlet-name>
+    <url-pattern>/*</url-pattern>
+  </servlet-mapping>
+
+</web-app>

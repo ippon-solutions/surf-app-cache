@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Dependent Spring context providing data layer configuration -->
+<!-- Referenced by higher level context -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/jee
+http://www.springframework.org/schema/jee/spring-jee.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <!-- Allow RESTEasy to scan Spring managed components -->
+  <context:annotation-config/>
+  <context:component-scan base-package="uk.co.ipponsolutions.surfapp" />
+  
+  <import resource="appContext-locationDetails.xml" />
+  <import resource="appContext-forecastTriggers.xml" />
+  
+  <bean id="forecastLocationsUrlResolver" class="uk.co.ipponsolutions.surfapp.service.ForecastLocationsUrlResolver">
+  	<property name="locationsList" ref="locationsList"/>
+  </bean>
+  
+  <bean id="locationsUrlResolver" class="uk.co.ipponsolutions.surfapp.service.LocationsUrlResolver">
+  	<property name="locationsList" ref="locationsList"/>
+  </bean>
+  
+  <bean id="forecastWaveDataParser" class="uk.co.ipponsolutions.surfapp.forecastTask.ForecastWaveDataParser">
+  	<property name="locationsList" ref="locationsList"/>
+  	<property name="uriDetails" ref="uriDetails"/>
+  </bean>
+  
+  <bean id="forecastWeatherDataParser" class="uk.co.ipponsolutions.surfapp.forecastTask.ForecastWeatherDataParser">
+  	<property name="locationsList" ref="locationsList"/>
+  	<property name="uriDetails" ref="uriDetails"/>
+  </bean>
+
+  <bean id="forecastTideDataParser" class="uk.co.ipponsolutions.surfapp.forecastTask.ForecastTideDataParser">
+  	<property name="locationsList" ref="locationsList"/>
+  	<property name="uriDetails" ref="uriDetails"/>
+  </bean>
+	
+  <!-- Property configuration (if required) -->
+  <bean id="serverProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="ignoreResourceNotFound" value="true"/>
+    <property name="locations">
+      <list>
+        <!-- Later files overwrite earlier ones in this list -->
+        <value>file:/var/wave/config/server.properties</value>
+      </list>
+    </property>
+  </bean>
+
+</beans>
