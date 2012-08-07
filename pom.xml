@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion> 
 
 	<groupId>uk.co.ipponsolutions.surf</groupId>
-	<artifactId>surf-app</artifactId>
+	<artifactId>surf-app-cache</artifactId>
     <packaging>war</packaging>
     <version>0.1.0.BUILD-SNAPSHOT</version>
 
@@ -25,7 +25,7 @@
           <useTestClasspath>true</useTestClasspath>
           <!-- Register this application as a context -->
           <webAppConfig>
-            <contextPath>/premium/data/SurfApp</contextPath>
+            <contextPath>/surf-app-cache</contextPath>
           </webAppConfig>
           <connectors>
             <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
