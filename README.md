@@ -15,13 +15,21 @@ Run the application tests using, ```mvn test```
 
 ##End points
 
-###Get location summary details
+###Locations
+
+####Get all locations
+
+/surf-app-cache/Locations/All
+
+###Forecasts
+
+####Get location summary details
 
 To get the next available timestep for a location, go to: ```surf-app-cache/Forecasts/{location}/Summary```
 Enter the location name in ```{location}```
 
 
-###Get location forecast
+####Get location forecast
 
 To get the full forecast details for a location, go to: ```surf-app-cache/Forecasts/{location}```
 Enter the location name in ```{location}```

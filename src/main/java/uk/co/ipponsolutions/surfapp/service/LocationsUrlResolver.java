@@ -17,7 +17,7 @@ public class LocationsUrlResolver {
 	private LocationsList locationsList;
 	
 	@GET
-	@Path("/All")
+	@Path("All")
 	@Produces("application/json")
 	public List<LocationInfo> getLocations() {
 		List<LocationInfo> locations = new ArrayList<LocationInfo>();
