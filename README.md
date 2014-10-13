@@ -19,7 +19,7 @@ Run the application tests using, ```mvn test```
 
 ####Get all locations
 
-/surf-app-cache/Locations/All
+To find out all possible locations, go to: ```/surf-app-cache/Locations/All```
 
 ###Forecasts
 
