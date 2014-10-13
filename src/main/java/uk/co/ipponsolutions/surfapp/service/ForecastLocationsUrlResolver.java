@@ -22,7 +22,7 @@ public class ForecastLocationsUrlResolver {
 	private LocationsList locationsList;
 	
 	@GET  
-    @Path("{locationName}")  
+    @Path("{locationName}/Summary")  
     @Produces("application/json")  
     public Response getLocationDetails(@PathParam("locationName") String locationName) {  
 		Location location = locationsList.getLocationDetails(locationName);
@@ -39,32 +39,12 @@ public class ForecastLocationsUrlResolver {
 		
 		return Response.status(200).entity(locationSummary).build();
     }
-	
-	@GET
-	@Path("/Summary")
-	@Produces("application/json")
-	public Response getSummaryForecasts() {
 		
-		Location location = locationsList.getLocationDetails("Bude");
-		Date date = HelperMethods.getNextDatePeriodAfterNow();
-		WaveData waveData = location.getWaveDataForTimeStep(date);
-		ForecastTimestep forecastTimestep = location.getWeatherDataForTimeStep(date);
-		TideTable tideTable = location.getTidalDataForTimeStep(date);
-
-		LocationSummary locationSummary = new LocationSummary();
-		locationSummary.setLocation(location.getLocationName());
-		locationSummary.setForecastTimestep(forecastTimestep);
-		locationSummary.setTideTable(tideTable);
-		locationSummary.setWaveData(waveData);
-		
-		return Response.status(200).entity(locationSummary).build();
-	}
-	
 	@GET
-	@Path("/Location")
+	@Path("{locationName}")
 	@Produces("application/json")
-	public Location getLocation() {
-		Location location = locationsList.getLocationDetails("Bude");
+	public Location getLocation(@PathParam("locationName") String locationName) {
+		Location location = locationsList.getLocationDetails(locationName);
 		return location;
 	}
 	

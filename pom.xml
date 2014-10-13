@@ -152,7 +152,7 @@
     <dependency>
       <groupId>org.scannotation</groupId>
       <artifactId>scannotation</artifactId>
-      <version>1.0.2</version>
+      <version>1.0.3</version>
     </dependency>
     <!-- SLF4j (generic logging for libraries) -->
     <dependency>
