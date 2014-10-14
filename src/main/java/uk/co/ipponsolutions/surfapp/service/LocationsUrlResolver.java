@@ -22,7 +22,7 @@ public class LocationsUrlResolver {
 	public List<LocationInfo> getLocations() {
 		List<LocationInfo> locations = new ArrayList<LocationInfo>();
 		for (Location location : locationsList.getLocationsList()) {
-			locations.add(new LocationInfo(location.getLocationName()));
+			locations.add(new LocationInfo(location.getLocationName(), location.getLatitude(), location.getLongitude()));
 		}
 		return locations;
 	}
